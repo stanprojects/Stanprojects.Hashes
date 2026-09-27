@@ -119,7 +119,8 @@ let indices = 0
 async function onText(text) {
     const index = ++indices
     const bytes = toByteArray(text)
-    const hash = await crypto.subtle.digest('SHA-256', bytes)
+    // const hash = await crypto.subtle.digest('SHA-256', bytes)
+    const hash = new Uint8Array(md5.arrayBuffer(bytes))
     if (index !== indices) return
     HashValue.textContent = bytesToHex(hash)
 }
