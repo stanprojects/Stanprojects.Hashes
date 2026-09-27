@@ -141,3 +141,8 @@ textarea::selection {
     border-radius: 8px;
     background-color: var(--colors-textfield);
 }
+
+.CopyButton {
+    padding: 8px 16px;
+    border-radius: 8px;
+}

@@ -25,13 +25,10 @@
     <div style="width: 100%; box-sizing: border-box; padding: 0 16px">
         <div style="width: 100%; height: 1px; background-color: var(--colors-selected);"></div>
     </div>
-    <div style="width: 100%; box-sizing: border-box; height: 16px;"></div>
-    <div style="width: 100%; box-sizing: border-box; padding: 0 16px">
+    <div class="FlexBox" style="width: 100%; flex-direction: column; padding: 16px; gap: 16px">
         <textarea id="TextInput" placeholder="Enter your text for hashing..." class="TextInput" style="width: 100%; height: 128px;"></textarea>
-    </div>
-    <div style="width: 100%; box-sizing: border-box; height: 16px;"></div>
-    <div style="width: 100%; box-sizing: border-box; padding: 0 16px">
         <code id="HashValue" class="block"></code>
+        <div id="CopyButton" class="Box Clickable CopyButton">copy</div>
     </div>
 </div>
 <script src="./src/main/js/md5.js"></script>

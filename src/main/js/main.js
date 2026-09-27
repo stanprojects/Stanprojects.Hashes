@@ -24,6 +24,7 @@ const ColorsSwitch = document.getElementById('ColorsSwitch')
 const HashAlgorithmList = document.getElementById('HashAlgorithmList')
 const TextInput = document.getElementById('TextInput')
 const HashValue = document.getElementById('HashValue')
+const CopyButton = document.getElementById('CopyButton')
 
 function colorsOf(name) {
     return Object.values(Colors).includes(name) ? name : Colors.Dark;
@@ -141,6 +142,14 @@ async function onText(text) {
 
 TextInput.addEventListener('input', () => {
     onText(TextInput.value)
+})
+
+CopyButton.addEventListener('click', () => {
+    try {
+        navigator.clipboard.writeText(HashValue.textContent)
+    } catch (error) {
+        // ignored
+    }
 })
 
 window.addEventListener('popstate', () => {
