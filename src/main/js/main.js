@@ -4,12 +4,23 @@ const Colors = Object.freeze({
     Light: 'light',
 });
 
+const HashAlgorithm = Object.freeze({
+    MD5: 'md5',
+});
+
 let _colors = undefined
+let _hashAlgorithm = undefined
+const hashAlgorithms = [HashAlgorithm.MD5]
 
 const ColorsSwitch = document.getElementById('ColorsSwitch')
+const HashAlgorithmList = document.getElementById('HashAlgorithmList')
 
 function colorsOf(name) {
     return Object.values(Colors).includes(name) ? name : Colors.Dark;
+}
+
+function hashAlgorithmOf(name) {
+    return Object.values(HashAlgorithm).includes(name) ? name : HashAlgorithm.MD5;
 }
 
 function renderColors(colors) {
@@ -21,15 +32,26 @@ function renderColors(colors) {
         : './src/main/svg/favicon_light.svg'
 }
 
-function getState({ colors = _colors } = {}) {
-    return `#colors=${colors}`
+function renderHashAlgorithm(hashAlgorithm) {
+    _hashAlgorithm = hashAlgorithm
+    HashAlgorithmList.querySelectorAll('.HashAlgorithmItem').forEach((it) => {
+        it.classList.toggle('selected', it.dataset.id === hashAlgorithm)
+    })
+    // todo
 }
 
-function onStateChange({ colors = _colors }, needsToPush = false) {
+function getState({ colors = _colors, hashAlgorithm = _hashAlgorithm } = {}) {
+    return `#colors=${colors}&ha=${hashAlgorithm}`
+}
+
+function onStateChange({ colors = _colors, hashAlgorithm = _hashAlgorithm }, needsToPush = false) {
     if (_colors !== colors) {
         renderColors(colors)
     }
-    const expected = getState({ colors: colors })
+    if (_hashAlgorithm !== hashAlgorithm) {
+        renderHashAlgorithm(hashAlgorithm)
+    }
+    const expected = getState({ colors: colors, hashAlgorithm: hashAlgorithm })
     if (location.hash !== expected) {
         if (needsToPush) {
             history.pushState(null, '', expected)
@@ -42,7 +64,19 @@ function onStateChange({ colors = _colors }, needsToPush = false) {
 function onPopState() {
     const params = new URLSearchParams(location.hash.slice(1))
     const colors = colorsOf(params.get('colors'))
-    onStateChange({ colors: colors })
+    const hashAlgorithm = hashAlgorithmOf(params.get('ha'))
+    onStateChange({ colors: colors, hashAlgorithm: hashAlgorithm })
+}
+
+function initHashAlgorithms(hashAlgorithms) {
+    HashAlgorithmList.replaceChildren()
+    for (const hashAlgorithm of hashAlgorithms) {
+        const it = document.createElement('div')
+        it.dataset.id = hashAlgorithm
+        it.className = 'Box Clickable HashAlgorithmItem'
+        it.textContent = hashAlgorithm
+        HashAlgorithmList.appendChild(it)
+    }
 }
 
 ColorsSwitch.addEventListener('click', () => {
@@ -53,5 +87,7 @@ ColorsSwitch.addEventListener('click', () => {
 window.addEventListener('popstate', () => {
     onPopState()
 })
+
+initHashAlgorithms(hashAlgorithms)
 
 onPopState()

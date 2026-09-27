@@ -36,3 +36,18 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.HashAlgorithmItem {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.HashAlgorithmItem.selected {
+    background-color: var(--colors-selected);
+    color: var(--colors-primary);
+    cursor: auto;
+}
