@@ -6,13 +6,15 @@ const Colors = Object.freeze({
 
 let _colors = undefined
 
+const ColorsSwitch = document.getElementById('ColorsSwitch')
+
 function colorsOf(name) {
     return Object.values(Colors).includes(name) ? name : Colors.Dark;
 }
 
 function renderColors(colors) {
     _colors = colors
-    // ColorsSwitch.textContent = colors // todo
+    ColorsSwitch.textContent = colors
     document.documentElement.setAttribute('data-colors', colors)
     document.querySelector('link[rel="icon"]').href = colors === Colors.Dark
         ? './src/main/svg/favicon_dark.svg'
@@ -42,6 +44,11 @@ function onPopState() {
     const colors = colorsOf(params.get('colors'))
     onStateChange({ colors: colors })
 }
+
+ColorsSwitch.addEventListener('click', () => {
+    const colors = _colors === Colors.Dark ? Colors.Light : Colors.Dark
+    onStateChange({ colors: colors })
+})
 
 window.addEventListener('popstate', () => {
     onPopState()
