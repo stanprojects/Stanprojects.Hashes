@@ -119,8 +119,22 @@ let indices = 0
 async function onText(text) {
     const index = ++indices
     const bytes = toByteArray(text)
-    // const hash = await crypto.subtle.digest('SHA-256', bytes)
-    const hash = new Uint8Array(md5.arrayBuffer(bytes))
+    let hash
+    switch (_hashAlgorithm) {
+        case HashAlgorithm.MD5:
+            hash = new Uint8Array(md5.arrayBuffer(bytes))
+            break
+        case HashAlgorithm.SHA1:
+            hash = await crypto.subtle.digest('SHA-1', bytes)
+            break
+        case HashAlgorithm.SHA256:
+            hash = await crypto.subtle.digest('SHA-256', bytes)
+            break
+        case HashAlgorithm.SHA512:
+            hash = await crypto.subtle.digest('SHA-512', bytes)
+            break
+        default: throw new Error(`Algorithm: ${_hashAlgorithm} is not supported!`)
+    }
     if (index !== indices) return
     HashValue.textContent = bytesToHex(hash)
 }
