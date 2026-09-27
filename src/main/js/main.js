@@ -23,6 +23,7 @@ const hashAlgorithms = [
 const ColorsSwitch = document.getElementById('ColorsSwitch')
 const HashAlgorithmList = document.getElementById('HashAlgorithmList')
 const TextInput = document.getElementById('TextInput')
+const HashValue = document.getElementById('HashValue')
 
 function colorsOf(name) {
     return Object.values(Colors).includes(name) ? name : Colors.Dark;
@@ -113,8 +114,18 @@ HashAlgorithmList.addEventListener('click', (event) => {
     }
 })
 
-TextInput.addEventListener('input', () => {
-    const text = TextInput.value
+let indices = 0
+
+async function onText(text) {
+    const index = ++indices
+    const bytes = toByteArray(text)
+    const hash = await crypto.subtle.digest('SHA-256', bytes)
+    if (index !== indices) return
+    HashValue.textContent = bytesToHex(hash)
+}
+
+TextInput.addEventListener('input', (event) => {
+    onText(TextInput.value)
 })
 
 window.addEventListener('popstate', () => {
