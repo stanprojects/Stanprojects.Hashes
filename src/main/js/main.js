@@ -22,6 +22,7 @@ const hashAlgorithms = [
 
 const ColorsSwitch = document.getElementById('ColorsSwitch')
 const HashAlgorithmList = document.getElementById('HashAlgorithmList')
+const TextInput = document.getElementById('TextInput')
 
 function colorsOf(name) {
     return Object.values(Colors).includes(name) ? name : Colors.Dark;
@@ -29,6 +30,18 @@ function colorsOf(name) {
 
 function hashAlgorithmOf(name) {
     return Object.values(HashAlgorithm).includes(name) ? name : HashAlgorithm.MD5;
+}
+
+function toByteArray(text) {
+    return new TextEncoder().encode(text)
+}
+
+function byteToHex(byte) {
+    return byte.toString(16).padStart(2, '0')
+}
+
+function bytesToHex(bytes) {
+    return Array.from(new Uint8Array(bytes)).map(byteToHex).join('')
 }
 
 function renderColors(colors) {
@@ -98,6 +111,10 @@ HashAlgorithmList.addEventListener('click', (event) => {
     if (_hashAlgorithm !== it.dataset.id) {
         onStateChange({ hashAlgorithm: hashAlgorithmOf(it.dataset.id) })
     }
+})
+
+TextInput.addEventListener('input', () => {
+    const text = TextInput.value
 })
 
 window.addEventListener('popstate', () => {
