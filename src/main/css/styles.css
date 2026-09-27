@@ -54,7 +54,7 @@ textarea:focus-visible {
 }
 
 textarea::placeholder {
-    color: inherit;
+    color: var(--colors-selected);
     opacity: 1;
 }
 
