@@ -8,6 +8,7 @@
 }
 
 [data-colors="dark"] {
+  --colors-textfield: #181818ff;
   --colors-background: #202020ff;
   --colors-focused: #282828ff;
   --colors-pressed: #303030ff;
@@ -17,6 +18,7 @@
 }
 
 [data-colors="light"] {
+  --colors-textfield: #d8d8d8ff;
   --colors-background: #d0d0d0ff;
   --colors-focused: #c8c8c8ff;
   --colors-pressed: #c0c0c0ff;

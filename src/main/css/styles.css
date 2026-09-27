@@ -8,6 +8,61 @@ body {
     color: var(--colors-text);
 }
 
+textarea {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    scrollbar-width: none;
+    scrollbar-color: #000000ff #00000000;
+    box-sizing: border-box;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    field-sizing: fixed;
+    color: var(--colors-text);
+    caret-color: var(--colors-text);
+    cursor: text;
+    user-select: text;
+    resize: none;
+    overflow: auto;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .textarea:hover {
+        background-color: #00000000;
+    }
+}
+
+textarea:active {
+    outline: 0;
+    box-shadow: none;
+}
+
+textarea:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+textarea:focus-visible {
+    outline: 0;
+    box-shadow: none;
+}
+
+textarea::placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+textarea::selection {
+    color: inherit;
+    background: var(--colors-primary);
+}
+
 .Clickable {
     cursor: pointer;
     user-select: none;
@@ -58,4 +113,10 @@ body {
     background-color: var(--colors-selected);
     color: var(--colors-primary);
     cursor: auto;
+}
+
+.TextInput {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: var(--colors-textfield);
 }
