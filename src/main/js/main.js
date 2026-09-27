@@ -6,11 +6,19 @@ const Colors = Object.freeze({
 
 const HashAlgorithm = Object.freeze({
     MD5: 'md5',
+    SHA1: 'sha1',
+    SHA256: 'sha256',
+    SHA512: 'sha512',
 });
 
 let _colors = undefined
 let _hashAlgorithm = undefined
-const hashAlgorithms = [HashAlgorithm.MD5]
+const hashAlgorithms = [
+    HashAlgorithm.MD5,
+    HashAlgorithm.SHA1,
+    HashAlgorithm.SHA256,
+    HashAlgorithm.SHA512,
+]
 
 const ColorsSwitch = document.getElementById('ColorsSwitch')
 const HashAlgorithmList = document.getElementById('HashAlgorithmList')

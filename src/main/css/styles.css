@@ -37,13 +37,21 @@ body {
     text-overflow: ellipsis;
 }
 
+.HashAlgorithmList {
+    padding: 16px;
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+}
+
+.HashAlgorithmList > * {
+    flex-shrink: 0;
+}
+
 .HashAlgorithmItem {
-    display: block;
     padding: 8px 16px;
     border-radius: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .HashAlgorithmItem.selected {
