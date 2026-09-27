@@ -59,7 +59,7 @@ function renderHashAlgorithm(hashAlgorithm) {
     HashAlgorithmList.querySelectorAll('.HashAlgorithmItem').forEach((it) => {
         it.classList.toggle('selected', it.dataset.id === hashAlgorithm)
     })
-    // todo
+    onText(TextInput.value)
 }
 
 function getState({ colors = _colors, hashAlgorithm = _hashAlgorithm } = {}) {
@@ -139,7 +139,7 @@ async function onText(text) {
     HashValue.textContent = bytesToHex(hash)
 }
 
-TextInput.addEventListener('input', (event) => {
+TextInput.addEventListener('input', () => {
     onText(TextInput.value)
 })
 
