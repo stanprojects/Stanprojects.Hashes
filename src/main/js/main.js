@@ -92,6 +92,14 @@ ColorsSwitch.addEventListener('click', () => {
     onStateChange({ colors: colors })
 })
 
+HashAlgorithmList.addEventListener('click', (event) => {
+    const it = event.target.closest('.HashAlgorithmItem')
+    if (!it) return
+    if (_hashAlgorithm !== it.dataset.id) {
+        onStateChange({ hashAlgorithm: hashAlgorithmOf(it.dataset.id) })
+    }
+})
+
 window.addEventListener('popstate', () => {
     onPopState()
 })
